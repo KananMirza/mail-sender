@@ -3,6 +3,7 @@ package com.company.orient.sendmail.controller;
 import com.company.orient.sendmail.dto.MailRequestDto;
 import com.company.orient.sendmail.response.ResponseApi;
 import com.company.orient.sendmail.service.EmailService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -22,7 +23,7 @@ public class EmailController {
     private final EmailService emailService;
 
     @PostMapping("/send")
-    public ResponseEntity<ResponseApi> sendEmail(@RequestBody @Valid MailRequestDto mailRequestDto){
+    public ResponseEntity<ResponseApi> sendEmail(@RequestBody @Valid MailRequestDto mailRequestDto) throws MessagingException {
         String response = emailService.sendEmail(mailRequestDto);
         ResponseApi responseApi = new ResponseApi();
         responseApi.setStatus(HttpStatus.OK.value());
