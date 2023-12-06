@@ -23,10 +23,7 @@ public class EmailController {
 
     @PostMapping("/send")
     public ResponseEntity<ResponseApi> sendEmail(@RequestBody @Valid MailRequestDto mailRequestDto){
-        String to = mailRequestDto.getTo();
-        String subject = mailRequestDto.getSubject();
-        String text = mailRequestDto.getText();
-        String response = emailService.sendEmail(to,subject,text);
+        String response = emailService.sendEmail(mailRequestDto);
         ResponseApi responseApi = new ResponseApi();
         responseApi.setStatus(HttpStatus.OK.value());
         responseApi.setMessage(response);
